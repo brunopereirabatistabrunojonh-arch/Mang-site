@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' — MangáHub' : 'MangáHub' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body <%= typeof bodyClass !== 'undefined' && bodyClass ? 'class="' + bodyClass + '"' : '' %>>
+  <div class="topbar">
+    <a href="/" class="brand">
+      <div class="brand-kanji">📖</div>
+      <div class="brand-text">Mangá<b>Hub</b></div>
+    </a>
+    
+    <form class="search-form" method="GET" action="/">
+      <input type="text" name="q" placeholder="Buscar mangá..." value="<%= typeof q !== 'undefined' ? q : '' %>">
+      <button type="submit">BUSCAR</button>
+    </form>
+    
+    <div class="nav-links">
+      <% if (currentUser) { %>
+        <a href="/dashboard">Meus Mangás</a>
+        <a href="/library">Biblioteca</a>
+        <a href="/notifications" class="bell-link">
+          🔔
+          <% if (unreadNotifications > 0) { %>
+            <span class="bell-badge"><%= unreadNotifications %></span>
+          <% } %>
+        </a>
+        <a href="/profile/<%= currentUser.username %>">
+          <div class="avatar-chip" style="background-color: <%= currentUser.avatar_color %>;"><%= currentUser.username.charAt(0).toUpperCase() %></div>
+        </a>
+        <form method="POST" action="/logout" style="display: inline; margin: 0;">
+          <button type="submit" class="link-btn" style="font-size: 14px;">Sair</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Entrar</a>
+        <a href="/register" class="btn-cta">Criar Conta</a>
+      <% } %>
+    </div>
+  </div>
+  
+  <div class="container">
