@@ -1,9 +1,15 @@
 // -*- coding: utf-8 -*-
 // Configura o banco de dados SQLite (arquivo único, sem precisar de servidor externo).
 const path = require("path");
+const fs = require("fs");
 const Database = require("better-sqlite3");
 
-const DB_PATH = path.join(__dirname, "data", "manga.db");
+const DB_DIR = path.join(__dirname, "data");
+const DB_PATH = path.join(DB_DIR, "manga.db");
+
+// Criar diretório se não existir
+fs.mkdirSync(DB_DIR, { recursive: true });
+
 const db = new Database(DB_PATH);
 db.pragma("journal_mode = WAL");
 db.pragma("foreign_keys = ON");
