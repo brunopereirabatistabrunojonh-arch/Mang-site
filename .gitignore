@@ -1,9 +1,33 @@
+# Dependencies
 node_modules/
-data/manga.db
-data/
-public/uploads/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# Environment variables
 .env
 .env.local
-*.log
-.DS_Store
+.env.*.local
+
+# Uploads (if storing locally)
+public/uploads/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
